@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Geografie-Spiel</title>
+</head>
+
+<body>
+
+  <section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+      <a href="#"
+        class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+        role="alert">
+        <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">Hügel</span> <span
+          class="text-sm font-medium">GraviJet abonnieren!</span>
+        <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </a>
+      <h1
+        class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        Hauptstädte von Europa
+
+      </h1>
+      <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+        Du musst hier Hauptstädte erraten.
+      </p>
+
+      <button onclick="startGame()"
+        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+        Spiel starten
+        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M1 5h12m0 0L9 1m4 4L9 9" />
+        </svg>
+      </button>
+
+      <span id="frage"></span>
+    </div>
+  </section>
+
+
+
+  <script>
+    let laender = [
+      { land: "Albanien", stadt: "Tirana" },
+      { land: "Andorra", stadt: "Andorra la Vella" },
+      { land: "Aserbaidschan", stadt: "Baku" },
+      { land: "Belgien", stadt: "Brüssel" },
+      { land: "Bosnien und Herzegowina", stadt: "Sarajevo" },
+      { land: "Bulgarien", stadt: "Sofia" },
+      { land: "Dänemark", stadt: "Kopenhagen" },
+      { land: "Deutschland", stadt: "Berlin" },
+      { land: "Estland", stadt: "Tallinn" },
+      { land: "Finnland", stadt: "Helsinki" },
+      { land: "Frankreich", stadt: "Paris" },
+      { land: "Georgien", stadt: "Tiflis" },
+      { land: "Griechenland", stadt: "Athen" },
+      { land: "Irland", stadt: "Dublin" },
+      { land: "Island", stadt: "Reykjavik" },
+      { land: "Kasachstan", stadt: "Nur-Sultan" },
+      { land: "Kroatien", stadt: "Zagreb" },
+      { land: "Lettland", stadt: "Riga" },
+      { land: "Liechtenstein", stadt: "Vaduz" },
+      { land: "Litauen", stadt: "Vilnius" },
+      { land: "Luxemburg", stadt: "Luxemburg" },
+      { land: "Malta", stadt: "Valletta" },
+      { land: "Moldau", stadt: "Chisinau" },
+      { land: "Monaco", stadt: "Monaco" },
+      { land: "Montenegro", stadt: "Podgorica" },
+      { land: "Niederlande", stadt: "Amsterdam" },
+      { land: "Nordmazedonien", stadt: "Skopje" },
+      { land: "Norwegen", stadt: "Oslo" },
+      { land: "Österreich", stadt: "Wien" },
+      { land: "Polen", stadt: "Warschau" },
+      { land: "Portugal", stadt: "Lissabon" },
+      { land: "Rumänien", stadt: "Bukarest" },
+      { land: "Russland", stadt: "Moskau" },
+      { land: "San Marino", stadt: "San Marino" },
+      { land: "Schweden", stadt: "Stockholm" },
+      { land: "Schweiz", stadt: "Bern" },
+      { land: "Serbien", stadt: "Belgrad" },
+      { land: "Slowakei", stadt: "Belgrad" },
+      { land: "Slowenien", stadt: "Ljubljana" },
+      { land: "Spanien", stadt: "Madrid" },
+      { land: "Tschechien", stadt: "Prag" },
+      { land: "Türkei", stadt: "Ankara" },
+      { land: "Ukraine", stadt: "Kiew" },
+      { land: "Ungarn", stadt: "Budapest" },
+      { land: "Vatikanstadt", stadt: "Vatikanstadt" },
+      { land: "Vereinigtes Königreich ", stadt: "London" },
+      { land: "Russland", stadt: "Minsk" },
+    ];
+
+
+    function startGame() {
+
+      let punkte = 0;
+      laender = laender.sort((a, b) => Math.random() - 0.5);
+
+      for (let i = 1; i <= laender.length; i++) {
+        const quizLand = laender[i - 1]; // Math.floor(Math.random() * laender.length)];
+        const frageElement = document.getElementById("frage");
+        const guess = window.prompt(`Punkte: ${punkte}\n**Frage ${i}**\n\nWas ist die Hauptstadt von ${quizLand.land}?`);
+
+        if (guess === quizLand.stadt) {
+          alert("Super, du hast es Richtig! Ein Punkt dazu!");
+          punkte++;
+        } else {
+          alert(`Falsch! Richtige Antwort wäre ${quizLand.stadt} gewesen.`);
+        }
+      }
+
+      const msg = `Auswertung\n\nPunkte: ${punkte}\n\nErgebnis: `
+      if (punkte === laender.length) {
+        alert(msg + "Super, du hast alle Aufgaben richtig!");
+      } else if (punkte > laender.length * 0.75) {
+        alert(msg + "Super, du hast die meisten Aufgaben richtig!");
+      } else {
+        alert(msg + "!!!Mehr lernen!!!");
+      }
+    }
+  </script>
+</body>
+
+</html>
