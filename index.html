@@ -23,26 +23,63 @@
             clip-rule="evenodd"></path>
         </svg>
       </a>
+
       <h1
         class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
         Hauptstädte von Europa
-
       </h1>
-      <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-        Du musst hier Hauptstädte erraten.
-      </p>
 
-      <button onclick="startGame()"
-        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-        Spiel starten
-        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 14 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 5h12m0 0L9 1m4 4L9 9" />
-        </svg>
-      </button>
+      <div id="start">
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          Du musst hier Hauptstädte erraten.
+        </p>
 
-      <span id="frage"></span>
+        <button onclick="startGame()"
+          class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+          Spiel starten
+          <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="richtig"
+        class="hidden p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert">
+        <span class="font-medium">Super!</span> Das war richtig!
+      </div>
+
+      <div id="falsch"
+        class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert">
+      </div>
+
+      <div id="frage" class="hidden">
+        <p id="aufgabe" class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          Hier steht die Aufgabe
+        </p>
+
+        <div class="flow">
+          <button id="land1" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+            1</button>
+          <button id="land2" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+            2</button>
+          <button id="land3" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+            3</button>
+          <button id="land4" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+            4</button>
+          <button id="land5" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+            5</button>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -99,15 +136,43 @@
       { land: "Russland", stadt: "Minsk" },
     ];
 
+    let punkte = 0;
+    let fragenCounter = 0;
 
     function startGame() {
-
-      let punkte = 0;
+      fragenCounter++;
       laender = laender.sort((a, b) => Math.random() - 0.5);
+      const quizLand = laender[Math.floor(Math.random() * laender.length)];
 
+      document.getElementById("start").classList.add("hidden");
+      document.getElementById("aufgabe").innerText = `Was ist die Hauptstadt von ${quizLand.land}?`;
+      document.getElementById("frage").classList.remove("hidden");
+
+      let punkteText = ` <b>Score: ${punkte} Punkte</b> bei ${fragenCounter} Fragen`;
+      for (let i = 1; i <= 5; i++) {
+        const falscherButton = document.getElementById("land" + i);
+        falscherButton.innerText = laender[Math.floor(Math.random() * laender.length)].stadt;
+        falscherButton.onclick = () => {
+          document.getElementById("falsch").innerHTML = `Falsch! Richtige Antwort wäre ${quizLand.stadt} gewesen.${punkteText}`
+          document.getElementById("richtig").classList.add("hidden");
+          document.getElementById("falsch").classList.remove("hidden");
+          startGame();
+        }
+      }
+
+      const richtigerButton = document.getElementById("land" + (Math.floor(Math.random() * 5) + 1));
+      richtigerButton.innerText = quizLand.stadt;
+      richtigerButton.onclick = () => {
+        punkte++;
+        punkteText = ` <b>Score: ${punkte} Punkte</b> bei ${fragenCounter} Fragen`;
+        document.getElementById("falsch").classList.add("hidden");
+        document.getElementById("richtig").classList.remove("hidden");
+        document.getElementById("richtig").innerHTML = `Wow, das war richtig!! ${punkteText}`
+        startGame();
+      }
+
+      /*
       for (let i = 1; i <= laender.length; i++) {
-        const quizLand = laender[i - 1]; // Math.floor(Math.random() * laender.length)];
-        const frageElement = document.getElementById("frage");
         const guess = window.prompt(`Punkte: ${punkte}\n**Frage ${i}**\n\nWas ist die Hauptstadt von ${quizLand.land}?`);
 
         if (guess === quizLand.stadt) {
@@ -125,7 +190,7 @@
         alert(msg + "Super, du hast die meisten Aufgaben richtig!");
       } else {
         alert(msg + "!!!Mehr lernen!!!");
-      }
+      }*/
     }
   </script>
 </body>
