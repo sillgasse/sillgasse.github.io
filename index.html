@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
   <title>Geografie-Spiel</title>
 </head>
 
@@ -24,61 +25,74 @@
         </svg>
       </a>
 
-      <h1
-        class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-        Hauptstädte von Europa
-      </h1>
+      <div id="hauptspiel">
+        <h1
+          class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Hauptstädte von Europa
+        </h1>
 
-      <div id="start">
-        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          Alle Länder und Städte haben die gleichen Angaben wie Wikipedia.
-        </p>
+        <div id="start">
+          <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+            Alle Länder und Städte haben die gleichen Angaben wie Wikipedia.
+          </p>
 
-        <button onclick="startGame()"
-          class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-          Spiel starten
-          <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M1 5h12m0 0L9 1m4 4L9 9" />
-          </svg>
-        </button>
-      </div>
-
-      <div id="richtig"
-        class="hidden p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-        role="alert">
-        <span class="font-medium">Super!</span> Das war richtig!
-      </div>
-
-      <div id="falsch"
-        class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-        role="alert">
-      </div>
-
-      <div id="frage" class="hidden">
-        <p id="aufgabe" class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          Hier steht die Aufgabe
-        </p>
-
-        <div class="flow">
-          <button id="land1" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
-            1</button>
-          <button id="land2" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
-            2</button>
-          <button id="land3" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
-            3</button>
-          <button id="land4" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
-            4</button>
-          <button id="land5" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
-            5</button>
+          <button onclick="startGame()"
+            class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+            Spiel starten
+            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M1 5h12m0 0L9 1m4 4L9 9" />
+            </svg>
+          </button>
         </div>
 
+        <div id="richtig"
+          class="hidden p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+          role="alert">
+          <span class="font-medium">Super!</span> Das war richtig!
+        </div>
+
+        <div id="falsch"
+          class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert">
+        </div>
+
+        <div id="frage" class="hidden">
+          <p id="aufgabe"
+            class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+            Hier steht die Aufgabe
+          </p>
+
+          <div class="flow">
+            <button id="land1" type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+              1</button>
+            <button id="land2" type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+              2</button>
+            <button id="land3" type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+              3</button>
+            <button id="land4" type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+              4</button>
+            <button id="land5" type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Land
+              5</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="gewonnen" class="hidden">
+        <h1
+          class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-green-400 md:text-5xl lg:text-6xl dark:text-white"
+          id="gewonnenText">
+          Halllo, sieht mich wer?
+        </h1>
+
+        <div class="fireworks">
+        </div>
       </div>
     </div>
   </section>
@@ -139,6 +153,24 @@
     let fragenCounter = 0;
 
     function startGame() {
+      if (fragenCounter > 9) {
+        document.getElementById("hauptspiel").classList.add("hidden");
+        document.getElementById("gewonnen").classList.remove("hidden");
+        const prozent = Math.round(punkte / fragenCounter * 100);
+        let text = `Score: ${punkte} Punkte bei ${fragenCounter} Fragen<br>${prozent}% richtig!<br>`;
+        if (prozent < 70) {
+          document.getElementById("gewonnenText").classList.add("text-red-400");
+          text += "Mehr Lernen!!!";
+        } else {
+          document.getElementById("gewonnenText").classList.add("text-green-400");
+          text += "Du bist spitze! :-)";
+          const container = document.querySelector('.fireworks')
+          const fireworks = new Fireworks.default(container)
+          fireworks.start()
+        }
+        document.getElementById("gewonnenText").innerHTML = text;
+      }
+
       fragenCounter++;
       laender = laender.sort((a, b) => Math.random() - 0.5);
       const quizLand = laender[Math.floor(Math.random() * laender.length)];
