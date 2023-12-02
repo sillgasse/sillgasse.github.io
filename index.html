@@ -158,7 +158,7 @@
         document.getElementById("gewonnen").classList.remove("hidden");
         const prozent = Math.round(punkte / fragenCounter * 100);
         let text = `Score: ${punkte} Punkte bei ${fragenCounter} Fragen<br>${prozent}% richtig!<br>`;
-        if (prozent < 70) {
+        if (prozent < 80) {
           document.getElementById("gewonnenText").classList.add("text-red-400");
           text += "Mehr Lernen!!!";
         } else {
