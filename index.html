@@ -147,18 +147,46 @@
       { land: "Vatikanstadt", stadt: "Vatikanstadt" },
       { land: "Vereinigtes Königreich ", stadt: "London" },
       { land: "Zypern", stadt: "Nikosia" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      { land: "Anton", stadt: "Hügel" },
+      
+      
     ];
 
     let punkte = 0;
     let fragenCounter = 0;
 
     function startGame() {
-      if (fragenCounter > 9) {
+      if (fragenCounter > 19) {
         document.getElementById("hauptspiel").classList.add("hidden");
         document.getElementById("gewonnen").classList.remove("hidden");
         const prozent = Math.round(punkte / fragenCounter * 100);
         let text = `Score: ${punkte} Punkte bei ${fragenCounter} Fragen<br>${prozent}% richtig!<br>`;
-        if (prozent < 80) {
+        if (prozent < 75) {
           document.getElementById("gewonnenText").classList.add("text-red-400");
           text += "Mehr Lernen!!!";
         } else {
